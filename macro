@@ -1,0 +1,38 @@
+ListLines Off
+
+#IfWinActive ahk_exe gta_sa.exe
+
+F2::Reload
+
+t::Suspend
+
+LSHIFT::Suspend, Off
+
+space::
+    if WinActive("ahk_exe gta_sa.exe")
+    {
+        ControlSend, , {e down}{space down}, ahk_class Grand theft auto San Andreas
+        Sleep 5
+        ControlSend, , {q down}, ahk_class Grand theft auto San Andreas
+        Sleep 10
+        ControlSend, , {e up}{space up}, ahk_class Grand theft auto San Andreas
+        Sleep 2
+        ControlSend, , {space down}, ahk_class Grand theft auto San Andreas
+        Sleep 0
+        ControlSend, , {q up}{space up}, ahk_class Grand theft auto San Andreas
+        
+        while GetKeyState("space", "P") && WinActive("ahk_exe gta_sa.exe")
+        {
+            ControlSend, , {space down}, ahk_class Grand theft auto San Andreas
+            Random, rand, 1, 30
+            Sleep %rand%
+            ControlSend, , {space up}, ahk_class Grand theft auto San Andreas
+            Sleep 1
+        }
+    }
+    else
+    {
+        ControlSend, , {space up}, ahk_class Grand theft auto San Andreas
+    }
+
+space up::ControlSend, , {space up}, ahk_class Grand theft auto San Andreas
